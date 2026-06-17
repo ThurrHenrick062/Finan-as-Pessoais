@@ -15,8 +15,8 @@ export async function register(req, res) {
         return res.status(409).json({message: 'Email já existe'})
     }
 
-    const passowrdHash = await bcrypt.hash(password, 10)
-    const id = await User.create(name, email, passowrdHash)
+    const passwordHash = await bcrypt.hash(password, 10);
+    const id = await User.create(name, email, passwordHash);
     res.status(201).json({message: "Usuário criado"})
 
 }
@@ -26,7 +26,7 @@ export async function login(req,res) {
     
     const user = await User.findByEmail(email)
     if(!user){
-        res.status(401).json({message: "Credencias Invalidas"})
+        return res.status(401).json({message: "Credencias Invalidas"})
     }
 
     const match = await bcrypt.compare(password, user.password_hash)
@@ -35,7 +35,7 @@ export async function login(req,res) {
     }
 
     const token = jwt.sign({id: user.id}, process.env.JWT_SECRET, {expiresIn: '1d'})
-    res.json({token})
+        return res.json({token})
 
 }
 
