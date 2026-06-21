@@ -11,7 +11,7 @@ export async function create(userId, name, type) {
     const [result] = await pool.query(
         "INSERT INTO categories (user_id, name, type) VALUES (?,?,?)",[userId,name,type]
     )
-    return result.isertId
+    return result.insertId
 }
 
 export async function update(id, user_id, name, type) {

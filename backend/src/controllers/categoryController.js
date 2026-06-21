@@ -15,12 +15,12 @@ export async function criar(req,res) {
     if(!name || !type){
         return res.status(400).json({message: "Preencha todos os campos"})
     }
-    if(type !== 'income' || type !== 'expense'){
+    if(type !== 'income' && type !== 'expense'){
         return res.status(400).json({message: "Utilize somente income ou expense"})
     }
 
     const resposta = await Categories.create(userId,name,type)
-    res.status(201).json({message: 'Categoria criada'})
+        return res.status(201).json({message: 'Categoria criada'})
     
 }
 
