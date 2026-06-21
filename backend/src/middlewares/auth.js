@@ -13,7 +13,7 @@ export function auth (req, res, next){
         req.user = payload
         next()
     } catch (err){
-        return res.status(403).json({message: "Token inspirado ou invalido"})
+        return res.status(403).json({ message: "Token expirado ou invalido" });
     }
 
 }
